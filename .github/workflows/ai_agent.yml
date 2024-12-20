@@ -21,12 +21,21 @@ jobs:
       - name: Install dependencies
         run: pip install torch transformers sentencepiece
 
-      # Krok 3: Generowanie posta za pomocą LLaMA 2
+      # Krok 3: Commit i push nowego posta
+      - name: Login and donwload llm
+        run: |
+          pip install huggingface_hub
+          huggingface-cli login
+          git lfs install
+          git clone https://huggingface.co/meta-llama/Llama-2-7b-hf
+
+
+      # Krok 4: Generowanie posta za pomocą LLaMA 2
       - name: Generate blog post
         run: |
           python scripts/generate_post.py
 
-      # Krok 4: Commit i push nowego posta
+      # Krok 5: Commit i push nowego posta
       - name: Commit and push changes
         run: |
           git config user.name "AI Agent"
