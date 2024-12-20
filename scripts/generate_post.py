@@ -4,10 +4,11 @@ import os
 from datetime import datetime
 
 # Wczytanie modelu i tokenizer
-model_name = "meta-llama/Llama-2-7b-hf"  # Wersja Hugging Face modelu LLaMA 2
-tokenizer = LlamaTokenizer.from_pretrained(model_name)
-model = LlamaForCausalLM.from_pretrained(model_name, device_map="auto")
+# Load model directly
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-hf")
+model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf")
 # Prompt do generowania treści
 prompt = "Napisz bloga na temat wpływu sztucznej inteligencji na nowoczesne technologie."
 
